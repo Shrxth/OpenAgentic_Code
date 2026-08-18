@@ -9,8 +9,9 @@ def route_task(task: str) -> str:
     )
 
     browser_terms = (
-        "website", "web", "browser",
-        "search", "online", "navigate"
+        "website", "web", "browser", "search",
+        "online", "navigate", "open", "visit",
+        "google", "url", "page"
     )
 
     if any(term in text for term in coding_terms):

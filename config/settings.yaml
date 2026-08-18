@@ -1,0 +1,12 @@
+project:
+  name: OpenAgentic Code
+
+agents:
+  coding: OpenHands
+  browser: Browser Use
+
+security:
+  command_policy: enabled
+
+evaluation:
+  enabled: true

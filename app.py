@@ -14,7 +14,15 @@ while True:
     if not task:
         continue
 
-    result = controller.execute(task)
+    try:
+        result = controller.execute(task)
 
-    print(f"Agent: {result['selected_agent']}")
-    print(f"Status: {result['status']}")
+        if hasattr(result, "final_result"):
+            print("\nResult:")
+            print(result.final_result())
+        else:
+            print(f"\nAgent: {result.get('selected_agent', 'unknown')}")
+            print(f"Status: {result.get('status', 'unknown')}")
+
+    except Exception as e:
+        print(f"\nAgent error: {e}")

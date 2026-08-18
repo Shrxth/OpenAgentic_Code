@@ -1,34 +1,53 @@
 # OpenAgentic Code
 
-A unified AI agent orchestration project integrating coding and browser automation capabilities.
+### Local-first AI agent orchestration for intelligent task execution
 
-## Architecture
+OpenAgentic Code is an experimental AI agent orchestration system that routes user tasks to specialized agents and executes them using local AI models and browser automation.
 
-User
-  ?
-Task Router
-  ?
-Agent Controller
-  +-- Coding Agent
-  +-- Browser Agent
-  ?
-Policy & Safety Layer
-  ?
-Verification
-  ?
-Result
+> **User Task → Router → Controller → Specialized Agent → Tools → Verified Result**
 
-## Upstream Projects
+---
 
-This project is designed to integrate and extend open-source agent technologies including OpenHands and Browser Use.
+## ⚡ What It Does
 
-Upstream projects remain credited to their respective authors and are subject to their respective licenses.
+OpenAgentic Code provides a unified interface for interacting with different AI agents.
 
-## Project Goals
+A task is classified by the router and delegated to the appropriate execution path.
 
-- Unified agent orchestration
-- Intelligent task routing
-- Tool execution policies
-- Safety controls
-- Automated evaluation
-- Model/provider flexibility
+```text
+                         ┌─────────────────┐
+                         │      User       │
+                         └────────┬────────┘
+                                  │
+                                  ▼
+                         ┌─────────────────┐
+                         │   Task Router   │
+                         └────────┬────────┘
+                                  │
+                                  ▼
+                         ┌─────────────────┐
+                         │ Agent Controller│
+                         └────────┬────────┘
+                                  │
+                    ┌─────────────┼─────────────┐
+                    ▼             ▼             ▼
+              ┌──────────┐  ┌───────────┐  ┌──────────┐
+              │  Coding  │  │  Browser  │  │ General  │
+              │   Agent  │  │   Agent   │  │   Agent  │
+              └──────────┘  └─────┬─────┘  └──────────┘
+                                  │
+                                  ▼
+                           ┌─────────────┐
+                           │   Ollama    │
+                           │ Local LLM   │
+                           └──────┬──────┘
+                                  │
+                                  ▼
+                           ┌─────────────┐
+                           │    Chrome   │
+                           └──────┬──────┘
+                                  │
+                                  ▼
+                           ┌─────────────┐
+                           │    Result   │
+                           └─────────────┘

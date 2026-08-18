@@ -1,19 +1,10 @@
-import os
-import asyncio
-from browser_use import Agent, ChatOpenAI
+from browser_use import Agent, ChatOllama
 
 
 async def run_browser_agent(task: str):
-    api_key = os.getenv("OPENAI_API_KEY")
-
-    if not api_key:
-        raise RuntimeError(
-            "OPENAI_API_KEY is not configured."
-        )
-
-    llm = ChatOpenAI(
-        model="gpt-4o-mini",
-        api_key=api_key,
+    llm = ChatOllama(
+        model="llama3.1:8b",
+        num_ctx=32000,
     )
 
     agent = Agent(

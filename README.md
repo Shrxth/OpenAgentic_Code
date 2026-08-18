@@ -31,62 +31,80 @@ The project was created to explore the engineering challenges involved in buildi
 - Control potentially runaway agent execution
 - Establish a foundation for future multi-agent capabilities
 - Maintain a reproducible Git/GitHub development workflow
+
 ## 🏗️ Architecture
 
+```text
 ┌──────────────────┐
-│       USER       │
+│       USER       │
 └────────┬─────────┘
 │
 ▼
 ┌──────────────────┐
-│   TASK ROUTER    │
+│   TASK ROUTER    │
 └────────┬─────────┘
 │
 ▼
 ┌─────────────────────┐
-│   AGENT CONTROLLER  │
+│   AGENT CONTROLLER  │
 └──────────┬──────────┘
 │
 ┌─────────────┼─────────────┐
-│             │             │
-▼             ▼             ▼
-┌──────────┐  ┌──────────┐  ┌──────────┐
-│ Coding   │  │ Browser  │  │ General  │
-│  Agent   │  │  Agent   │  │  Agent   │
-└──────────┘  └────┬─────┘  └──────────┘
+│             │             │
+▼             ▼             ▼
+┌──────────┐  ┌──────────┐  ┌──────────┐
+│ Coding   │  │ Browser  │  │ General  │
+│  Agent   │  │  Agent   │  │  Agent   │
+└──────────┘  └────┬─────┘  └──────────┘
 │
 ▼
 ┌─────────────┐
-│   Ollama    │
+│   Ollama    │
 │ Local Model │
 └──────┬──────┘
 │
 ▼
 ┌─────────────┐
-│    Chrome   │
+│    Chrome   │
 └──────┬──────┘
 │
 ▼
 ┌─────────────┐
-│    Result   │
-└─────────────┘
+│    Result   │
+└─────────────┘```
+
 ## ✨ Current Capabilities
 
 | Capability | Status |
+
 |---|:---:|
+
 | Task classification | ✅ |
+
 | Agent routing | ✅ |
+
 | Unified agent controller | ✅ |
+
 | Browser agent | ✅ |
+
 | Local Ollama integration | ✅ |
+
 | Chrome automation | ✅ |
+
 | Browser information extraction | ✅ |
+
 | Bounded browser execution | ✅ |
+
 | Basic execution policy layer | ✅ |
+
 | Router tests | ✅ |
+
 | End-to-end browser verification | ✅ |
+
 | Advanced multi-agent collaboration | 🔬 Future |
+
 | Production-grade sandboxing | 🔬 Future |
+
 | Full autonomous coding-agent execution | 🔬 Future |
 
 ## 🧪 Verified End-to-End Execution
@@ -94,24 +112,44 @@ The project was created to explore the engineering challenges involved in buildi
 The final browser workflow was successfully verified locally.
 
 Input
+
 Open https://example.com and tell me the page title
+
 Execution
-Natural Language Task
+
+```text
+Natural Language Task```
+
 ↓
+
 Task Router
+
 ↓
+
 Browser Agent
+
 ↓
+
 Ollama / Llama 3.1 8B
+
 ↓
+
 - Browser Use
+
 ↓
+
 - Chrome
+
 ↓
+
 Page Information Extraction
+
 ↓
+
 Final Result
+
 Final Result
+
 > The title of the webpage is 'Example Domain'.
 
 This verified the complete local execution path:
@@ -152,7 +190,7 @@ Windows PowerShell execution-policy restrictions initially prevented direct acti
 
 Instead of changing system-wide security settings, the project was executed directly through the environment's Python executable:
 
-`.\.venv\Scripts\python.exe`
+\`.\.venv\Scripts\python.exe\`
 
 This provided a reliable execution path without requiring shell activation.
 
@@ -182,19 +220,29 @@ A dedicated task router was introduced to classify incoming tasks and select an 
 
 The routing model became:
 
-User Task
+```text
+User Task```
+
 │
+
 ┌─────────────┼─────────────┐
-▼             ▼             ▼
-Coding        Browser        General
-│             │             │
-▼             ▼             ▼
-Coding Agent  Browser Agent  General Agent
+
+▼             ▼             ▼
+
+Coding        Browser        General
+
+│             │             │
+
+▼             ▼             ▼
+
+Coding Agent  Browser Agent  General Agent
 
 Representative routing tests included:
 
 Fix this Python bug
+
 Search this website
+
 Explain how an API works
 
 This established the first working layer of task specialization.
@@ -204,16 +252,24 @@ This established the first working layer of task specialization.
 A central AgentController was introduced to separate:
 
 Task classification
+
 Policy checks
+
 Agent selection
+
 Agent execution
 
 Conceptually:
 
-AgentController
+```text
+AgentController```
+
 │
+
 ├── classify()
+
 ├── check_command()
+
 └── execute()
 
 This created a single orchestration interface instead of coupling the CLI directly to individual agents.
@@ -247,14 +303,14 @@ This enabled the demonstrated browser-agent workflow to run without requiring a 
 The first local browser-agent execution exposed a multimodal compatibility issue.
 
 Browser Use attempted to provide multimodal information to the selected model, producing an error equivalent to:
-
-Multimodal data provided, but model does not support multimodal requests.
+```text
+Multimodal data provided, but model does not support multimodal requests.```
 
 The issue was caused by a mismatch between the browser agent's vision requirements and the capabilities of the selected local model configuration.
 
 The browser agent was therefore configured for text-based execution:
 
-`use_vision=False`
+\`use_vision=False\`
 
 This allowed the browser workflow to operate using browser state and extracted text instead of unsupported multimodal requests.
 
@@ -275,18 +331,31 @@ Observed behavior included:
 
 The resulting pattern could become:
 
-Task Completed
+```text
+Task Completed```
+
 ↓
+
 Agent Continues
+
 ↓
+
 Unnecessary Action
+
 ↓
+
 Action Fails
+
 ↓
+
 Retry
+
 ↓
+
 Another Action
+
 ↓
+
 Potential Loop
 
 This became an important agent-control problem.
@@ -297,11 +366,11 @@ To prevent uncontrolled execution, explicit execution boundaries were introduced
 
 The browser agent was configured with:
 
-`max_steps=4`
+\`max_steps=4\`
 
 and:
 
-`max_failures=2`
+\`max_failures=2\`
 
 The task prompt was also strengthened with explicit completion instructions:
 
@@ -319,10 +388,15 @@ The task prompt was also strengthened with explicit completion instructions:
 
 The resulting execution strategy became:
 
-Perform Requested Task
+```text
+Perform Requested Task```
+
 ↓
+
 Extract Answer
+
 ↓
+
 Stop Within Step Budget
 
 rather than allowing the agent to continue exploring indefinitely.
@@ -334,11 +408,17 @@ After the execution boundaries were introduced, the browser workflow successfull
 The agent:
 
 1. Identified the target URL
+
 2. Navigated to example.com
+
 3. Loaded the webpage
+
 4. Extracted the page title
+
 5. Recognized that the requested information had been found
+
 6. Returned the final answer
+
 7. Terminated the browser session cleanly
 
 Final output:
@@ -353,7 +433,7 @@ The project was developed using incremental Git commits and pushed to GitHub thr
 
 Repository:
 
-[**github.com/Shrxth/OpenAgentic_Code**](https://github.com/Shrxth/OpenAgentic_Code)
+[**\*\*github.com/Shrxth/OpenAgentic_Code\*\***](https://github.com/Shrxth/OpenAgentic_Code)
 
 The development history includes changes covering:
 
@@ -372,23 +452,25 @@ The incremental Git history provides a traceable record of the project's develop
 
 ## 📁 Project Structure
 
-`OpenAgentic_Code/`
+```text
+\OpenAgentic_Code/\
 │
 ├── agent/
-`│   ├── controller.py`
-`│   ├── router.py`
-`│   ├── policies.py`
-`│   └── browser_agent.py`
+\│   ├── controller.py\
+\│   ├── router.py\
+\│   ├── policies.py\
+\│   └── browser_agent.py\
 │
 ├── tests/
-`│   └── test_router.py`
+\│   └── test_router.py\
 │
-`├── app.py`
-`├── test_agent.py`
-`├── config.py`
-`├── requirements.txt`
-`├── .gitignore`
-`└── README.md`
+\├── app.py\
+\├── test_agent.py\
+\├── config.py\
+\├── requirements.txt\
+\├── .gitignore\
+\└── README.md\```
+
 ## 🔐 Safety & Execution Policies
 
 A basic policy layer was introduced to provide an initial boundary around potentially unsafe command execution.
@@ -447,83 +529,153 @@ Local inference reduces dependence on hosted APIs but introduces additional cons
 - Package compatibility
 - Inference performance
 - Runtime configuration
+
 ## 🧩 Technology Stack
 
 | Layer | Technology |
+
 |---|---|
+
 | Programming Language | Python 3.12 |
+
 | Local LLM Runtime | Ollama |
+
 | Model | Llama 3.1 8B |
+
 | Browser Automation | Browser Use |
+
 | Browser | Chrome / Chromium |
+
 | Environment | Python virtual environment |
+
 | Version Control | Git + GitHub |
+
 | Development Environment | VS Code |
 
 ## 🚀 Quick Start
 
-Requirements
+### Requirements
+
 Python 3.12+
+
 - Ollama
+
 Chrome / Chromium
+
 - Git
-Clone
-`git clone https://github.com/Shrxth/OpenAgentic_Code.git`
-`cd OpenAgentic_Code`
-Create Virtual Environment
-`python -m venv .venv`
-Install Dependencies
-`.\.venv\Scripts\python.exe -m pip install -r requirements.txt`
-Download Local Model
-`ollama pull llama3.1:8b`
-Run
-`.\.venv\Scripts\python.exe app.py`
+
+### Clone
+
+```powershell
+\`git clone https://github.com/Shrxth/OpenAgentic_Code.git\```
+
+\`cd OpenAgentic_Code\`
+
+### Create Virtual Environment
+
+```powershell
+\`python -m venv .venv\```
+
+### Install Dependencies
+
+```powershell
+\`.\.venv\Scripts\python.exe -m pip install -r requirements.txt\```
+
+### Download Local Model
+
+```powershell
+\`ollama pull llama3.1:8b\```
+
+### Run
+
+```powershell
+\`.\.venv\Scripts\python.exe app.py\```
 
 Then enter a natural-language task.
 
 Example:
 
-`Task: Open https://example.com and tell me the page title`
+```text
+\`Task: Open https://example.com and tell me the page title\```
+
 ## 📊 Current Architecture vs. Future Direction
 
 Current
+
 User
+
 ↓
+
 Router
+
 ↓
+
 Controller
+
 ↓
+
 Browser Agent
+
 ↓
+
 - Ollama
+
 ↓
+
 - Browser Use
+
 ↓
+
 - Chrome
+
 ↓
+
 Result
+
 Future Direction
+
 ┌──────────────┐
-│    Planner   │
+
+│    Planner   │
+
 └──────┬───────┘
+
 │
+
 ▼
+
 ┌──────────────┐
+
 │ Smart Router │
+
 └──────┬───────┘
+
 │
+
 ┌─────────────────┼─────────────────┐
-▼                 ▼                 ▼
-Coding Agent      Browser Agent     Research Agent
-│                 │                 │
+
+▼                 ▼                 ▼
+
+Coding Agent      Browser Agent     Research Agent
+
+│                 │                 │
+
 └─────────────────┼─────────────────┘
+
 ▼
+
 Verification Layer
+
 │
+
 ▼
+
 Safety / Policy
+
 │
+
 ▼
+
 Final Result
 
 > The future architecture is intentionally shown as future direction, not as functionality already implemented.
@@ -544,6 +696,7 @@ Current limitations include:
 - No advanced observability system
 - No graphical interface
 - Limited multi-agent collaboration
+
 ## 🗺️ Roadmap
 
 - [ ] Advanced task planning
@@ -559,6 +712,7 @@ Current limitations include:
 - [ ] Additional local models
 - [ ] Optional graphical interface
 - [ ] Production deployment architecture
+
 ## 🌐 Open-Source Foundation & Attribution
 
 OpenAgentic Code integrates and builds upon open-source technologies including:
@@ -579,20 +733,35 @@ Upstream licenses and attribution requirements should be preserved when redistri
 
 The current implementation successfully demonstrates:
 
-Natural Language Task
+```text
+Natural Language Task```
+
 ↓
+
 Task Routing
+
 ↓
+
 Agent Selection
+
 ↓
+
 Local LLM
+
 ↓
+
 Browser Automation
+
 ↓
+
 Information Extraction
+
 ↓
+
 Bounded Execution
+
 ↓
+
 Final Result
 
 The browser-agent workflow has been successfully executed end-to-end using a local Ollama model and Chrome.
@@ -606,6 +775,7 @@ Areas explored through this project:
 AI Agents · LLMs · Local AI · Browser Automation · Task Routing · Python · Agent Orchestration · AI Safety
 
 <div align="center">
+
 ⚡ OpenAgentic Code
 
 Explore → Route → Execute → Verify

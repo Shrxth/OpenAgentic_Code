@@ -1,7 +1,6 @@
 import os
 import asyncio
-from browser_use import Agent
-from langchain_openai import ChatOpenAI
+from browser_use import Agent, ChatOpenAI
 
 
 async def run_browser_agent(task: str):
@@ -14,7 +13,6 @@ async def run_browser_agent(task: str):
 
     llm = ChatOpenAI(
         model="gpt-4o-mini",
-        temperature=0,
         api_key=api_key,
     )
 
@@ -24,11 +22,3 @@ async def run_browser_agent(task: str):
     )
 
     return await agent.run()
-
-
-if __name__ == "__main__":
-    asyncio.run(
-        run_browser_agent(
-            "Open https://example.com and report the page title."
-        )
-    )

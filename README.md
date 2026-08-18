@@ -1,53 +1,53 @@
-# OpenAgentic Code
+<div align="center">
 
-### Local-first AI agent orchestration for intelligent task execution
+# ⚡ OpenAgentic Code
 
-OpenAgentic Code is an experimental AI agent orchestration system that routes user tasks to specialized agents and executes them using local AI models and browser automation.
+### Local-First AI Agent Orchestration
 
-> **User Task → Router → Controller → Specialized Agent → Tools → Verified Result**
+**Route tasks. Select specialized agents. Execute tools. Run AI locally.**
+
+![Python](https://img.shields.io/badge/Python-3.12-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Ollama](https://img.shields.io/badge/Ollama-Local%20LLM-black?style=for-the-badge&logo=ollama&logoColor=white)
+![Browser Use](https://img.shields.io/badge/Browser%20Use-Automation-orange?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Functional%20Prototype-2ea44f?style=for-the-badge)
+
+</div>
 
 ---
 
-## ⚡ What It Does
+## 🧠 Overview
 
-OpenAgentic Code provides a unified interface for interacting with different AI agents.
+**OpenAgentic Code** is a local-first AI agent orchestration project that explores how multiple specialized AI agents can be coordinated through a unified controller.
 
-A task is classified by the router and delegated to the appropriate execution path.
+Instead of treating an AI system as a single chatbot, the project separates task understanding, routing, agent selection, execution, tool interaction, and result generation.
+
+The current implementation demonstrates this architecture through:
+
+- Python-based task routing
+- A unified agent controller
+- Browser Use browser automation
+- Chrome execution
+- Local Ollama inference
+- Llama 3.1 8B
+- Basic execution policies
+- Bounded browser-agent execution
+- End-to-end task verification
+
+### Core Workflow
 
 ```text
-                         ┌─────────────────┐
-                         │      User       │
-                         └────────┬────────┘
-                                  │
-                                  ▼
-                         ┌─────────────────┐
-                         │   Task Router   │
-                         └────────┬────────┘
-                                  │
-                                  ▼
-                         ┌─────────────────┐
-                         │ Agent Controller│
-                         └────────┬────────┘
-                                  │
-                    ┌─────────────┼─────────────┐
-                    ▼             ▼             ▼
-              ┌──────────┐  ┌───────────┐  ┌──────────┐
-              │  Coding  │  │  Browser  │  │ General  │
-              │   Agent  │  │   Agent   │  │   Agent  │
-              └──────────┘  └─────┬─────┘  └──────────┘
-                                  │
-                                  ▼
-                           ┌─────────────┐
-                           │   Ollama    │
-                           │ Local LLM   │
-                           └──────┬──────┘
-                                  │
-                                  ▼
-                           ┌─────────────┐
-                           │    Chrome   │
-                           └──────┬──────┘
-                                  │
-                                  ▼
-                           ┌─────────────┐
-                           │    Result   │
-                           └─────────────┘
+User Task
+    ↓
+Task Router
+    ↓
+Agent Controller
+    ↓
+Specialized Agent
+    ↓
+Tools / Local LLM
+    ↓
+Execution
+    ↓
+Verification
+    ↓
+Final Result

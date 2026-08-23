@@ -1,4 +1,4 @@
-# OpenAgentic Code
+# OrchestAgent
 
 > A local-first agent orchestration prototype for routing tasks to specialized agents, executing browser workflows, and evaluating agent behavior with explicit execution boundaries.
 
